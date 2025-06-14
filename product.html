@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product - Nero Kopi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    body {
+      background-color: #0d0d0d;
+      color: white;
+      cursor: none;
+      position: relative;
+    }
+
+    #vanta-bg {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: -2;
+    }
+
+    .cursor {
+      width: 20px;
+      height: 20px;
+      background: #8f00ff;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      box-shadow: 0 0 15px #8f00ff, 0 0 30px #8f00ff;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+      z-index: 9999;
+    }
+
+    header {
+      position: fixed;
+      width: 100%;
+      padding: 20px 40px;
+      top: 0;
+      z-index: 10;
+      background: transparent;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .content {
+      padding: 150px 20px 60px;
+      max-width: 1200px;
+      margin: auto;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      text-shadow: 0 0 10px #8f00ff, 0 0 30px #8f00ff;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #8f00ff;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: scale(1.05);
+    }
+
+    .product-card img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .product-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .product-card p {
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    .product-card button {
+      background: #8f00ff;
+      border: none;
+      padding: 10px 20px;
+      color: #0d0d0d;
+      font-weight: bold;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .product-card button:hover {
+      background: #ffffff;
+      color: #8f00ff;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 50px;
+      color: white;
+      border: 1px solid #8f00ff;
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .back-link:hover {
+      background: #8f00ff;
+      color: #0d0d0d;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="vanta-bg"></div>
+  <div class="cursor" id="cursor"></div>
+
+  <header>
+    <div style="font-size: 1.5rem; font-weight: bold;">NERO KOPI</div>
+  </header>
+
+  <main class="content">
+    <h1>Our Products</h1>
+    <div class="product-grid">
+
+      <div class="product-card">
+        <img src="oribeans.jpg" alt="Nero Origin Beans">
+        <h3>Nero Origin Beans (Green Bean)</h3>
+        <p>Biji kopi mentah kualitas ekspor dari Dataran Tinggi Gayo. Cocok untuk home roaster dan profesional.</p>
+        <p><strong>Rp 55.000 / 250g</strong></p>
+        <button class="add-to-cart-btn" data-product="Nero Origin Beans">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="sigbeans.jpg" alt="Nero Signature Beans">
+        <h3>Nero Signature Beans (Roasted)</h3>
+        <p>100% Arabika Gayo sangrai medium-dark. Rasa bold, cokelat, sedikit rempah. Ideal untuk espresso & tubruk.</p>
+        <p><strong>Rp 65.000 / 250g</strong></p>
+        <button class="add-to-cart-btn" data-product="Nero Signature Beans">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="grind.jpg" alt="Nero Grind Gayo">
+        <h3>Nero Grind Gayo (Bubuk Kopi)</h3>
+        <p>Giling segar sesuai kebutuhan: fine (Turkish), medium (V60), atau kasar (French Press). Rasa kompleks & seimbang.</p>
+        <p><strong>Rp 68.000 / 250g</strong></p>
+        <button class="add-to-cart-btn" data-product="Nero Grind Gayo">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="wine.jpg" alt="Nero Wine Series">
+        <h3>Nero Wine Series</h3>
+        <p>Kopi fermentasi natural dengan karakter rasa mirip wine: fruity, kompleks, dan eksklusif. Batch terbatas.</p>
+        <p><strong>Rp 85.000 / 200g</strong></p>
+        <button class="add-to-cart-btn" data-product="Nero Wine Series">Add to Cart</button>
+      </div>
+
+    </div>
+    <a class="back-link" href="index.html">← Back to Home</a>
+  </main>
+
+  <script>
+    // Neon Cursor
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = `${e.clientX}px`;
+      cursor.style.top = `${e.clientY}px`;
+    });
+
+    // VANTA 3D Background
+    VANTA.NET({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: 0x8f00ff,
+      backgroundColor: 0x0d0d0d,
+      points: 14.0,
+      maxDistance: 22.0,
+      spacing: 18.0
+    });
+
+    // Add to Cart Functionality (for now, just alert)
+    const products = {
+  "Nero Origin Beans": { name: "Nero Origin Beans", price: 55000 },
+  "Nero Signature Beans": { name: "Nero Signature Beans", price: 65000 },
+  "Nero Grind Gayo": { name: "Nero Grind Gayo", price: 68000 },
+  "Nero Wine Series": { name: "Nero Wine Series", price: 85000 }
+};
+
+document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const key = btn.getAttribute('data-product');
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const index = cart.findIndex(item => item.name === products[key].name);
+
+    if (index > -1) {
+      cart[index].quantity += 1;
+    } else {
+      cart.push({ ...products[key], quantity: 1 });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`"${products[key].name}" telah ditambahkan ke keranjang.`);
+  });
+});
+
+  </script>
+
+</body>
+</html>

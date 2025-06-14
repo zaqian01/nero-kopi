@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - Nero Kopi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    body {
+      background-color: #0d0d0d;
+      color: white;
+      cursor: none;
+    }
+
+    #vanta-bg {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: -2;
+    }
+
+    .cursor {
+      width: 20px;
+      height: 20px;
+      background: #8f00ff;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      box-shadow: 0 0 15px #8f00ff, 0 0 30px #8f00ff;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+      z-index: 9999;
+    }
+
+    header {
+      position: fixed;
+      width: 100%;
+      padding: 20px 40px;
+      top: 0;
+      z-index: 10;
+      background: transparent;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .content {
+      padding: 150px 20px 60px;
+      max-width: 700px;
+      margin: auto;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      text-shadow: 0 0 10px #8f00ff, 0 0 30px #8f00ff;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: rgba(255,255,255,0.05);
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid #8f00ff;
+      backdrop-filter: blur(6px);
+    }
+
+    input, textarea {
+      padding: 15px;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1rem;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #ccc;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      padding: 15px;
+      border: none;
+      border-radius: 30px;
+      background: #8f00ff;
+      color: #0d0d0d;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: white;
+      color: #8f00ff;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 40px;
+      color: white;
+      border: 1px solid #8f00ff;
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .back-link:hover {
+      background: #8f00ff;
+      color: #0d0d0d;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="vanta-bg"></div>
+  <div class="cursor" id="cursor"></div>
+
+  <header>
+    <div style="font-size: 1.5rem; font-weight: bold;">NERO KOPI</div>
+  </header>
+
+  <main class="content">
+    <h1>Contact Us</h1>
+    <form action="https://formspree.io/f/xqaqvpap" method="POST" onsubmit="return showAlert()">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <a class="back-link" href="index.html">← Back to Home</a>
+  </main>
+
+  <script>
+    // Neon Cursor
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = `${e.clientX}px`;
+      cursor.style.top = `${e.clientY}px`;
+    });
+
+    // VANTA Background
+    VANTA.NET({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: 0x8f00ff,
+      backgroundColor: 0x0d0d0d,
+      points: 14.0,
+      maxDistance: 22.0,
+      spacing: 18.0
+    });
+
+    // Success Alert
+    function showAlert() {
+      alert("Pesan berhasil dikirim. Terima kasih!");
+      return true;
+    }
+  </script>
+
+</body>
+</html>

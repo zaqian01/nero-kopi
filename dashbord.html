@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - Nero Kopi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: white;
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 100px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #8f00ff;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #444;
+    }
+
+    th {
+      color: #8f00ff;
+    }
+
+    .delete-btn {
+      background-color: #ff0040;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .login-container {
+      max-width: 400px;
+      margin: 150px auto;
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 15px #8f00ff;
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: none;
+      background: #2a2a2a;
+      color: white;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #8f00ff;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Page -->
+  <div class="login-container" id="login">
+    <h2>Admin Login</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="container" id="dashboard" style="display:none;">
+    <h1>Order Dashboard</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Jumlah</th>
+          <th>Harga</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="order-table"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const API_URL = "https://d8d7bddf-c926-4ef6-870e-19cb960052ab-00-i1xbb4efyovk.pike.replit.dev/api/orders";
+
+    function login() {
+      const u = document.getElementById("username").value;
+      const p = document.getElementById("password").value;
+
+      if (u === "elsora" && p === "Zaqian098") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+        loadOrders();
+      } else {
+        alert("Username atau password salah!");
+      }
+    }
+
+    async function loadOrders() {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        const table = document.getElementById("order-table");
+        table.innerHTML = "";
+
+        data.forEach((order, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${order.name}</td>
+            <td>${order.quantity}</td>
+            <td>Rp${order.price.toLocaleString()}</td>
+            <td><button class="delete-btn" onclick="deleteOrder(${index})">Hapus</button></td>
+          `;
+          table.appendChild(row);
+        });
+      } catch (err) {
+        console.error("Gagal memuat data:", err);
+      }
+    }
+
+    async function deleteOrder(index) {
+      try {
+        const res = await fetch(API_URL, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ index })
+        });
+
+        if (res.ok) {
+          alert("Order dihapus!");
+          loadOrders();
+        } else {
+          alert("Gagal menghapus.");
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Orbitron', sans-serif;
+  background-color: #0d0d0d;
+  color: white;
+  overflow-x: hidden;
+  cursor: none;
+  position: relative;
+}
+
+#vanta-bg {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: -10;
+}
+
+/* Neon cursor glow */
+#neon-cursor {
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(143, 0, 255, 0.4) 0%, transparent 80%);
+  border-radius: 50%;
+  z-index: 9999;
+  mix-blend-mode: screen;
+  transition: transform 0.05s ease-out;
+}
+
+/* Hero section */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  padding: 0 2rem;
+  animation: fadeIn 1.5s ease-out;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: white;
+  text-shadow: 0 0 10px #8f00ff, 0 0 20px #8f00ff;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 3rem;
+}
+
+/* Nav di bawah hero */
+nav {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  z-index: 10;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+  position: relative;
+}
+
+nav a:hover {
+  color: #8f00ff;
+  text-shadow: 0 0 10px #8f00ff;
+}
+
+/* Video section */
+.video-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
+  padding: 100px 0;
+}
+
+.video-section video {
+  width: 90%;
+  max-width: 900px;
+  border: 2px solid #8f00ff;
+  box-shadow: 0 0 30px #8f00ff;
+  border-radius: 12px;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(13, 13, 13, 0.4);
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
